@@ -1,0 +1,36 @@
+classDiagram
+    direction LR
+
+    class SingletonLazyHolder {
+        -SingletonLazyHolder()
+        +getInstancia()$ SingletonLazyHolder
+    }
+    class Configuracao {
+        <<enumeration>>
+        INSTANCIA
+        +registrarAcesso() int
+    }
+
+    class Comportamento {
+        <<interface>>
+        +mover() String
+    }
+    class Robo {
+        -comportamento: Comportamento
+        +setComportamento(c: Comportamento) void
+        +mover() String
+        +ajustarPelaEnergia(energia: int) void
+    }
+    Robo o-- Comportamento : estratégia atual
+
+    class Facade {
+        +migrarCliente(nome: String, cep: String) Cliente
+    }
+    class CrmService {
+        +gravarCliente(...) Cliente
+    }
+    class CepApi {
+        +consultar(cep: String) Optional~Endereco~
+    }
+    Facade --> CrmService
+    Facade --> CepApi
